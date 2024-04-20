@@ -30,7 +30,7 @@ public class RobotContainer {
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
   private final CommandXboxController m_driverController =
-      new CommandXboxController(OperatorConstants.kDriverControllerPort);
+      new CommandXboxController(OperatorConstants.DRIVER_CONTROLLER_PORT);
 
   public static Controller driveController;
 
@@ -66,10 +66,10 @@ public class RobotContainer {
   }
 
   private void testMotors() {
-    new JoystickButton(driveController, 1)
+    new JoystickButton(driveController, 2) //B
         .onTrue(new InstantCommand(() -> RobotContainer.driveSubsystem.testLeftSide(0.2)))
         .onFalse(new InstantCommand(() -> RobotContainer.driveSubsystem.testLeftSide(0.0)));
-    new JoystickButton(driveController, 4)
+    new JoystickButton(driveController, 3) //X
         .onTrue(new InstantCommand(() -> RobotContainer.driveSubsystem.testRightSide(0.2)))
         .onFalse(new InstantCommand(() -> RobotContainer.driveSubsystem.testRightSide(0.2)));
   }
