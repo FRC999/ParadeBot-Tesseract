@@ -26,4 +26,75 @@ public final class Constants {
     public static final int RIGHT_MOTOR_CENTER_CANID = 5;
     public static final int RIGHT_MOTOR_REAR_CANID = 6;
   }
+
+  public static final class OIConstants {
+		public static final int driverControllerPort = 0;
+
+		public static enum ControllerDeviceType {
+			LOGITECH,
+			PS5,
+			XBOX, // RightJ F/B, LeftJ L/R, L2/R2 - rotation
+			XBOX_ONEDRIVE // RIghtJ F/B/L/R, LeftJ - rotation
+		}
+
+		public static enum ControllerDevice {
+			
+			XBOX_CONTROLLER(
+					0, // Port Number for Xbox controller
+					ControllerDeviceType.XBOX,
+					0.03, // deadband X for Xbox
+					0.03, // deadband Y for Xbox //TODO: ALL DEADBAND FOR XBOX IS PLACEHOLDER
+					0.03, // deadband Omega for Xbox
+					false, // No cube controller configuration for Xbox yet
+					false);
+
+
+			private ControllerDeviceType controllerDeviceType;
+			private int portNumber;
+			private double deadbandX;
+			private double deadbandY;
+			private double deadbandOmega;
+			private boolean cubeControllerLeftStick;
+			private boolean cubeControllerRightStick;
+
+			ControllerDevice(int pn, ControllerDeviceType cdt, double dx, double dy, double dm, boolean ccL,
+					boolean ccR) {
+				this.portNumber = pn;
+				this.controllerDeviceType = cdt;
+				this.deadbandX = dx;
+				this.deadbandY = dy;
+				this.deadbandOmega = dm;
+				this.cubeControllerLeftStick = ccL;
+				this.cubeControllerRightStick = ccR;
+			}
+
+			public ControllerDeviceType getControllerDeviceType() {
+				return controllerDeviceType;
+			}
+
+			public int getPortNumber() {
+				return portNumber;
+			}
+
+			public double getDeadbandX() {
+				return deadbandX;
+			}
+
+			public double getDeadbandY() {
+				return deadbandY;
+			}
+
+			public double getDeadbandOmega() {
+				return deadbandOmega;
+			}
+
+			public boolean isCubeControllerLeftStick() {
+				return cubeControllerLeftStick;
+			}
+
+			public boolean isCubeControllerRightStick() {
+				return cubeControllerRightStick;
+			}
+		}
+	}
 }
