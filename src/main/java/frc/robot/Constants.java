@@ -15,13 +15,15 @@ package frc.robot;
 public final class Constants {
   public static class OperatorConstants {
     public static final int kDriverControllerPort = 0;
+    public static final boolean LEFT_MOTOR_INVERSION = true;
+    public static final boolean RIGHT_MOTOR_INVERSION = false;
   }
   public static class MotorConstants {
-    public static final int LEFTFRONT = 1;
-    public static final int LEFTCENTER = 2; 
-    public static final int LEFTREAR = 3;
-    public static final int RIGHTFRONT = 4;
-    public static final int RIGHTCENTER = 5;
-    public static final int RIGHTREAR = 6;
+    public static final int LEFT_MOTOR_FRONT_CANID = 1;
+    public static final int LEFT_MOTOR_CENTER_CANID = 2; 
+    public static final int LEFT_MOTOR_REAR_CANID = 3;
+    public static final int RIGHT_MOTOR_FRONT_CANID = 4;
+    public static final int RIGHT_MOTOR_CENTER_CANID = 5;
+    public static final int RIGHT_MOTOR_REAR_CANID = 6;
   }
 }

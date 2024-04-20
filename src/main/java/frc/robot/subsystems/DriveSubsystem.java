@@ -3,7 +3,6 @@
 // the WPILib BSD license file in the root directory of this project.
 
 package frc.robot.subsystems;
-import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.InvertType;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
@@ -14,20 +13,38 @@ import frc.robot.Constants;
 
 public class DriveSubsystem extends SubsystemBase {
   /** Creates a new DriveSubsystem. */
-  private WPI_TalonSRX leftFront = new WPI_TalonSRX(Constants.MotorConstants.LEFTFRONT);
-  private WPI_TalonSRX leftCenter = new WPI_TalonSRX(Constants.MotorConstants.LEFTCENTER);
-  private WPI_TalonSRX leftRear = new WPI_TalonSRX(Constants.MotorConstants.LEFTREAR);
-  private WPI_TalonSRX rightFront = new WPI_TalonSRX(Constants.MotorConstants.RIGHTFRONT);
-  private WPI_TalonSRX rightCenter = new WPI_TalonSRX(Constants.MotorConstants.RIGHTCENTER);
-  private WPI_TalonSRX rightRear = new WPI_TalonSRX(Constants.MotorConstants.RIGHTREAR);
+  private WPI_TalonSRX leftFront = new WPI_TalonSRX(Constants.MotorConstants.LEFT_MOTOR_FRONT_CANID);
+  private WPI_TalonSRX leftCenter = new WPI_TalonSRX(Constants.MotorConstants.LEFT_MOTOR_CENTER_CANID);
+  private WPI_TalonSRX leftRear = new WPI_TalonSRX(Constants.MotorConstants.LEFT_MOTOR_REAR_CANID);
+  private WPI_TalonSRX rightFront = new WPI_TalonSRX(Constants.MotorConstants.RIGHT_MOTOR_FRONT_CANID);
+  private WPI_TalonSRX rightCenter = new WPI_TalonSRX(Constants.MotorConstants.RIGHT_MOTOR_CENTER_CANID);
+  private WPI_TalonSRX rightRear = new WPI_TalonSRX(Constants.MotorConstants.RIGHT_MOTOR_REAR_CANID);
 
   private DifferentialDrive drive;
 
   public DriveSubsystem() {
+
+    configureMotors();
+
+    driveTrainBrakeMode();
+
+    drive = new DifferentialDrive(leftFront, rightFront);
+
+  }
+
+  private void configureMotors() {
+
+    // reset all motors
+    leftFront.configFactoryDefault();
+    leftCenter.configFactoryDefault();
+    leftRear.configFactoryDefault();
+    rightFront.configFactoryDefault();
+    rightCenter.configFactoryDefault();
+    rightRear.configFactoryDefault();
+
     //setup left motors
     //lf
-    leftFront.set(ControlMode.PercentOutput, 0);
-    leftFront.setInverted(true);
+    leftFront.setInverted(Constants.OperatorConstants.LEFT_MOTOR_INVERSION);
     //lc
     leftCenter.follow(leftFront);
     leftCenter.setInverted(InvertType.FollowMaster);
@@ -37,20 +54,13 @@ public class DriveSubsystem extends SubsystemBase {
 
     //setup right motors
     //rf
-    rightFront.set(ControlMode.PercentOutput, 0);
-    rightFront.setInverted(false);
+    rightFront.setInverted(Constants.OperatorConstants.RIGHT_MOTOR_INVERSION);
     //rc
     rightCenter.follow(rightFront);
     rightCenter.setInverted(InvertType.FollowMaster);
     //rr
     rightRear.follow(rightFront);
     rightRear.setInverted(InvertType.FollowMaster);
-
-
-    driveTrainBrakeMode();
-
-    drive = new DifferentialDrive(leftFront, rightFront);
-
   }
 
   private void driveTrainBrakeMode() {
