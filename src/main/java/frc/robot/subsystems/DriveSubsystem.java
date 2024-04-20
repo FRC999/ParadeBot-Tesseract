@@ -3,8 +3,9 @@
 // the WPILib BSD license file in the root directory of this project.
 
 package frc.robot.subsystems;
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.InvertType;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
@@ -23,8 +24,32 @@ public class DriveSubsystem extends SubsystemBase {
   private DifferentialDrive drive;
 
   public DriveSubsystem() {
+    //setup left motors
+    //lf
+    leftFront.set(ControlMode.PercentOutput, 0);
+    leftFront.setInverted(true);
+    //lc
+    leftCenter.follow(leftFront);
+    leftCenter.setInverted(InvertType.FollowMaster);
+    //lr
+    leftRear.follow(leftFront);
+    leftRear.setInverted(InvertType.FollowMaster);
+
+    //setup right motors
+    //rf
+    rightFront.set(ControlMode.PercentOutput, 0);
+    rightFront.setInverted(false);
+    //rc
+    rightCenter.follow(rightFront);
+    rightCenter.setInverted(InvertType.FollowMaster);
+    //rr
+    rightRear.follow(rightFront);
+    rightRear.setInverted(InvertType.FollowMaster);
+
 
     driveTrainBrakeMode();
+
+    drive = new DifferentialDrive(leftFront, rightFront);
 
   }
 
@@ -36,6 +61,12 @@ public class DriveSubsystem extends SubsystemBase {
       rightFront.setNeutralMode(NeutralMode.Brake);
       rightCenter.setNeutralMode(NeutralMode.Brake);
       rightRear.setNeutralMode(NeutralMode.Brake);
+  }
+
+  public void manualDrive(double move, double turn) {
+
+    drive.arcadeDrive(move, turn);
+
   }
 
   @Override
