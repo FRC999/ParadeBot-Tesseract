@@ -79,6 +79,14 @@ public class DriveSubsystem extends SubsystemBase {
 
   }
 
+  public void testLeftSide(double power) {
+    leftFront.set(power);
+  }
+
+  public void testRightSide(double power) {
+    rightFront.set(power);
+  }
+
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
