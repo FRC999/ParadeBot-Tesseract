@@ -13,10 +13,12 @@ package frc.robot;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
-  public static class OperatorConstants {
+  public static class DriveConstants {
     public static final int DRIVER_CONTROLLER_PORT = 5;
     public static final boolean LEFT_MOTOR_INVERSION = true;
     public static final boolean RIGHT_MOTOR_INVERSION = false;
+
+	public static double turnAdjust = 0.6;
   }
   public static class MotorConstants {
     public static final int LEFT_MOTOR_FRONT_CANID = 1;
@@ -40,7 +42,7 @@ public final class Constants {
 		public static enum ControllerDevice {
 			
 			XBOX_CONTROLLER(
-					0, // Port Number for Xbox controller
+					5, // Port Number for Xbox controller
 					ControllerDeviceType.XBOX,
 					0.03, // deadband X for Xbox
 					0.03, // deadband Y for Xbox //TODO: ALL DEADBAND FOR XBOX IS PLACEHOLDER

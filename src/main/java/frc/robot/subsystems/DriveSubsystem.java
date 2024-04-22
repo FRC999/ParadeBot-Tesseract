@@ -44,7 +44,7 @@ public class DriveSubsystem extends SubsystemBase {
 
     //setup left motors
     //lf
-    leftFront.setInverted(Constants.OperatorConstants.LEFT_MOTOR_INVERSION);
+    leftFront.setInverted(Constants.DriveConstants.LEFT_MOTOR_INVERSION);
     //lc
     leftCenter.follow(leftFront);
     leftCenter.setInverted(InvertType.FollowMaster);
@@ -54,7 +54,7 @@ public class DriveSubsystem extends SubsystemBase {
 
     //setup right motors
     //rf
-    rightFront.setInverted(Constants.OperatorConstants.RIGHT_MOTOR_INVERSION);
+    rightFront.setInverted(Constants.DriveConstants.RIGHT_MOTOR_INVERSION);
     //rc
     rightCenter.follow(rightFront);
     rightCenter.setInverted(InvertType.FollowMaster);
@@ -63,7 +63,7 @@ public class DriveSubsystem extends SubsystemBase {
     rightRear.setInverted(InvertType.FollowMaster);
   }
 
-  private void driveTrainBrakeMode() {
+  public void driveTrainBrakeMode() {
       //_this will make the robot brake when no command is given. !!very important!!
       leftFront.setNeutralMode(NeutralMode.Brake);
       leftCenter.setNeutralMode(NeutralMode.Brake);
@@ -73,9 +73,9 @@ public class DriveSubsystem extends SubsystemBase {
       rightRear.setNeutralMode(NeutralMode.Brake);
   }
 
-  public void manualDrive(double move, double turn) {
+  public void manualDrive(double speed, double turn) {
 
-    drive.arcadeDrive(move, turn);
+    drive.arcadeDrive(speed, turn);
 
   }
 

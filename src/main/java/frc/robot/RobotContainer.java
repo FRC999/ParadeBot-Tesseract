@@ -5,7 +5,7 @@
 package frc.robot;
 
 import frc.robot.Constants.OIConstants.ControllerDevice;
-import frc.robot.Constants.OperatorConstants;
+import frc.robot.Constants.DriveConstants;
 import frc.robot.commands.Autos;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.subsystems.DriveSubsystem;
@@ -26,11 +26,11 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
-  private final static DriveSubsystem driveSubsystem = new DriveSubsystem();
+  public final static DriveSubsystem driveSubsystem = new DriveSubsystem();
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
   private final CommandXboxController m_driverController =
-      new CommandXboxController(OperatorConstants.DRIVER_CONTROLLER_PORT);
+      new CommandXboxController(DriveConstants.DRIVER_CONTROLLER_PORT);
 
   public static Controller driveController;
 
@@ -67,11 +67,11 @@ public class RobotContainer {
 
   private void testMotors() {
     new JoystickButton(driveController, 2) //B
-        .onTrue(new InstantCommand(() -> RobotContainer.driveSubsystem.testLeftSide(0.2)))
+        .onTrue(new InstantCommand(() -> RobotContainer.driveSubsystem.testLeftSide(0.3)))
         .onFalse(new InstantCommand(() -> RobotContainer.driveSubsystem.testLeftSide(0.0)));
     new JoystickButton(driveController, 3) //X
-        .onTrue(new InstantCommand(() -> RobotContainer.driveSubsystem.testRightSide(0.2)))
-        .onFalse(new InstantCommand(() -> RobotContainer.driveSubsystem.testRightSide(0.2)));
+        .onTrue(new InstantCommand(() -> RobotContainer.driveSubsystem.testRightSide(0.3)))
+        .onFalse(new InstantCommand(() -> RobotContainer.driveSubsystem.testRightSide(0.0)));
   }
 
   /**
