@@ -18,7 +18,7 @@ public final class Constants {
     public static final boolean LEFT_MOTOR_INVERSION = true;
     public static final boolean RIGHT_MOTOR_INVERSION = false;
 
-	public static double turnAdjust = 0.6;
+	public static double turnAdjust = 1;
   }
   public static class MotorConstants {
     public static final int LEFT_MOTOR_FRONT_CANID = 1;

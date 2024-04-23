@@ -7,9 +7,11 @@ package frc.robot;
 import frc.robot.Constants.OIConstants.ControllerDevice;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.commands.Autos;
+import frc.robot.commands.DriveManuallyCommand;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.ExampleSubsystem;
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
@@ -39,7 +41,10 @@ public class RobotContainer {
     // Configure the trigger bindings
     configureDriverInterface();
     configureBindings();
-    testMotors();
+    driveSubsystem.setDefaultCommand(
+      new DriveManuallyCommand(
+        () -> getDriverXAxis(),
+        () -> getDriverYAxis()));
   }
 
   /**
@@ -65,6 +70,7 @@ public class RobotContainer {
     driveController = new Controller(ControllerDevice.XBOX_CONTROLLER);
   }
 
+  /*
   private void testMotors() {
     new JoystickButton(driveController, 2) //B
         .onTrue(new InstantCommand(() -> RobotContainer.driveSubsystem.testLeftSide(0.3)))
@@ -72,6 +78,15 @@ public class RobotContainer {
     new JoystickButton(driveController, 3) //X
         .onTrue(new InstantCommand(() -> RobotContainer.driveSubsystem.testRightSide(0.3)))
         .onFalse(new InstantCommand(() -> RobotContainer.driveSubsystem.testRightSide(0.0)));
+  }
+  */
+
+  private double getDriverXAxis() {
+    return driveController.getLeftStickY();
+  }
+
+  private double getDriverYAxis() {
+    return driveController.getRightStickX();
   }
 
   /**
