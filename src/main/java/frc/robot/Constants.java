@@ -13,6 +13,12 @@ package frc.robot;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
+  public static class PneumaticConstants {
+	public static final int COMPRESSOR_MODULE = 13;
+	public static final int FORWARD_CHANNEL = 0;
+	public static final int REVERSE_CHANNEL = 2;
+	
+  }
   public static class DriveConstants {
     public static final int DRIVER_CONTROLLER_PORT = 5;
     public static final boolean LEFT_MOTOR_INVERSION = true;
@@ -28,7 +34,6 @@ public final class Constants {
     public static final int RIGHT_MOTOR_CENTER_CANID = 5;
     public static final int RIGHT_MOTOR_REAR_CANID = 6;
   }
-
   public static final class OIConstants {
 		public static final int driverControllerPort = 0;
 

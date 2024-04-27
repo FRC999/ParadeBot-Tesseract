@@ -45,12 +45,10 @@ public class RobotContainer {
     configureDriverInterface();
     configureBindings();
     testClaw();
-    /*
     driveSubsystem.setDefaultCommand(
       new DriveManuallyCommand(
         () -> getDriverXAxis(),
         () -> getDriverYAxis()));
-    */
   }
 
   /**
