@@ -21,6 +21,11 @@ public class IntakeSubsystem extends SubsystemBase {
     driveTrainBrakeMode();
   }
 
+  public int getEncoder() {
+    int encoderValue = (int) intakeRotator.getSelectedSensorPosition();
+    return encoderValue;
+  }
+
   private void configureMotors() {
 
     // reset all motors
