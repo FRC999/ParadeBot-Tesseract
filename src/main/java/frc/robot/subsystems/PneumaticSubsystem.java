@@ -14,8 +14,8 @@ public class PneumaticSubsystem {
     private static DoubleSolenoid solenoid;
 
     public PneumaticSubsystem() {
-        compressor = new Compressor(13, PneumaticsModuleType.CTREPCM); // TODO: Test that pneumatics
-        solenoid = new DoubleSolenoid( PneumaticsModuleType.CTREPCM, 0, 7);
+        compressor = new Compressor(13, PneumaticsModuleType.CTREPCM);
+        solenoid = new DoubleSolenoid( PneumaticsModuleType.CTREPCM, 0, 2);
         activateCompressor();
       } 
     public void activateCompressor() {

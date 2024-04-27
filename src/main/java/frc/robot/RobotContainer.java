@@ -7,6 +7,8 @@ package frc.robot;
 import frc.robot.Constants.OIConstants.ControllerDevice;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.commands.Autos;
+import frc.robot.commands.ClawCloseCommand;
+import frc.robot.commands.ClawOpenCommand;
 import frc.robot.commands.DriveManuallyCommand;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.subsystems.DriveSubsystem;
@@ -42,10 +44,13 @@ public class RobotContainer {
     // Configure the trigger bindings
     configureDriverInterface();
     configureBindings();
+    testClaw();
+    /*
     driveSubsystem.setDefaultCommand(
       new DriveManuallyCommand(
         () -> getDriverXAxis(),
         () -> getDriverYAxis()));
+    */
   }
 
   /**
@@ -81,6 +86,12 @@ public class RobotContainer {
         .onFalse(new InstantCommand(() -> RobotContainer.driveSubsystem.testRightSide(0.0)));
   }
   */
+  private void testClaw() {
+    new JoystickButton(driveController, 2)
+      .onTrue(new ClawOpenCommand());
+    new JoystickButton(driveController, 3)
+      .onTrue(new ClawCloseCommand());
+  }
 
   private double getDriverXAxis() {
     return driveController.getLeftStickY();
