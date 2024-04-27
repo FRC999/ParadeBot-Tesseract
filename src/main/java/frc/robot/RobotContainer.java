@@ -11,6 +11,9 @@ import frc.robot.commands.ClawCloseCommand;
 import frc.robot.commands.ClawOpenCommand;
 import frc.robot.commands.DriveManuallyCommand;
 import frc.robot.commands.ExampleCommand;
+import frc.robot.commands.IntakeInCommand;
+import frc.robot.commands.IntakeOutCommand;
+import frc.robot.commands.IntakeStopCommand;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
@@ -48,6 +51,7 @@ public class RobotContainer {
     configureDriverInterface();
     configureBindings();
     testClaw();
+    testIntake();
     driveSubsystem.setDefaultCommand(
       new DriveManuallyCommand(
         () -> getDriverXAxis(),
@@ -92,6 +96,15 @@ public class RobotContainer {
       .onTrue(new ClawOpenCommand());
     new JoystickButton(driveController, 3)
       .onTrue(new ClawCloseCommand());
+  }
+
+  public void testIntake() {
+    new JoystickButton(driveController, 1)
+      .onTrue(new IntakeInCommand())
+      .onFalse(new IntakeStopCommand());
+    new JoystickButton(driveController, 4)
+      .onTrue(new IntakeOutCommand())
+      .onFalse(new IntakeStopCommand());
   }
 
   private double getDriverXAxis() {
