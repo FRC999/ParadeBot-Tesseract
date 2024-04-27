@@ -13,6 +13,12 @@ package frc.robot;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
+  public static class IntakeConstants {
+	public static final int LEFT_INTAKE_MOTOR_CANID = 10;
+	public static final int RIGHT_INTAKE_MOTOR_CANID = 11;
+	public static final int INTAKE_ROTATOR_MOTOR_CANID = 12;
+	public static final double INTAKE_SPEED = 0.4;
+  }
   public static class PneumaticConstants {
 	public static final int COMPRESSOR_MODULE = 13;
 	public static final int FORWARD_CHANNEL = 0;

@@ -23,13 +23,9 @@ public class DriveSubsystem extends SubsystemBase {
   private DifferentialDrive drive;
 
   public DriveSubsystem() {
-
     configureMotors();
-
     driveTrainBrakeMode();
-
     drive = new DifferentialDrive(leftFront, rightFront);
-
   }
 
   private void configureMotors() {
