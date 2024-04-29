@@ -14,6 +14,8 @@ import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.IntakeInCommand;
 import frc.robot.commands.IntakeOutCommand;
 import frc.robot.commands.IntakeStopCommand;
+import frc.robot.commands.RobotIntakeReverseCommand;
+import frc.robot.commands.RotateIntakeCommand;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
@@ -107,6 +109,13 @@ public class RobotContainer {
     new JoystickButton(driveController, 4)
       .onTrue(new IntakeOutCommand())
       .onFalse(new IntakeStopCommand());
+    new JoystickButton(driveController, 5)
+      .onTrue(new RotateIntakeCommand())
+      .onFalse(new IntakeStopCommand());
+    new JoystickButton(driveController, 6)
+      .onTrue(new RobotIntakeReverseCommand())
+      .onFalse(new IntakeStopCommand());
+
   }
 
   private double getDriverXAxis() {
