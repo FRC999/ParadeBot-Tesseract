@@ -10,7 +10,8 @@ import frc.robot.RobotContainer;
 
 public class SmartDashboardSubsystem extends SubsystemBase {
   /** Creates a new SmartDashboardSubsystem. */
-  public SmartDashboardSubsystem() {}
+  public SmartDashboardSubsystem() {
+  }
 
   public void updateEncoder() {
     SmartDashboard.putNumber("encoder value", RobotContainer.intakeSubsystem.getEncoder());
@@ -23,5 +24,6 @@ public class SmartDashboardSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     updateAllDisplays();
+    SmartDashboard.putNumber("encoder value", RobotContainer.intakeSubsystem.getEncoder());
   }
 }

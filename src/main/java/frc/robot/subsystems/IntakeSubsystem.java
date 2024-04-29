@@ -23,6 +23,7 @@ public class IntakeSubsystem extends SubsystemBase {
 
   public int getEncoder() {
     int encoderValue = (int) intakeRotator.getSelectedSensorPosition();
+    System.out.println("********######*********ENCODER VALUE:" + encoderValue);
     return encoderValue;
   }
 
