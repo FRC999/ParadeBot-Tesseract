@@ -19,6 +19,19 @@ public final class Constants {
 	public static final int INTAKE_ROTATOR_MOTOR_CANID = 11;
 	public static final double INTAKE_SPEED = 0.4;
   }
+  public static class ShooterConstants {
+	public static final boolean tiltMotorInvert = false;
+	public static final int PID_TILT = 0;
+	public static final int configureTimeoutMs = 30;
+	public static final boolean tiltEncoderSensorPhase = false;
+	public static final double PeakOutput = 0.4;
+	public static final int tiltDefaultAcceptableError = 1;
+	public static final int SLOT_0 = 0;
+	public static final double P_TILT = 0.8;
+	public static final double I_TILT = 0.0002;
+	public static final double D_TILT = 0.8;
+	public final static double F_TILT = 0;
+  }
   public static class PneumaticConstants {
 	public static final int COMPRESSOR_MODULE = 13;
 	public static final int FORWARD_CHANNEL = 0;
