@@ -14,7 +14,8 @@ public class SmartDashboardSubsystem extends SubsystemBase {
   }
 
   public void updateEncoder() {
-    SmartDashboard.putNumber("encoder value", RobotContainer.intakeSubsystem.getEncoder());
+    SmartDashboard.putNumber("relative encoder value", RobotContainer.intakeSubsystem.getEncoder());
+    SmartDashboard.putNumber("absolute encoder value", RobotContainer.armSubsystem.getTiltAbsoluteEncoder());
   }
 
   public void updateAllDisplays() {
@@ -24,6 +25,7 @@ public class SmartDashboardSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     updateAllDisplays();
-    SmartDashboard.putNumber("encoder value", RobotContainer.intakeSubsystem.getEncoder());
+    SmartDashboard.putNumber("relative encoder value", RobotContainer.intakeSubsystem.getEncoder());
+    SmartDashboard.putNumber("absolute encoder value", RobotContainer.armSubsystem.getTiltAbsoluteEncoder());
   }
 }

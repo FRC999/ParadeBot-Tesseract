@@ -18,7 +18,9 @@ public class ArmSubsystem extends SubsystemBase {
   /** Creates a new ArmSubsystem. */
   private WPI_TalonSRX intakeRotator = new WPI_TalonSRX(Constants.IntakeConstants.INTAKE_ROTATOR_MOTOR_CANID);
 
-  public ArmSubsystem() {}
+  public ArmSubsystem() {
+    configureRotatorMotor();
+  }
 
 
   public void configureRotatorMotor() {

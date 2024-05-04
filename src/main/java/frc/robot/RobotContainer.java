@@ -16,6 +16,7 @@ import frc.robot.commands.IntakeOutCommand;
 import frc.robot.commands.IntakeStopCommand;
 import frc.robot.commands.RobotIntakeReverseCommand;
 import frc.robot.commands.RotateIntakeCommand;
+import frc.robot.subsystems.ArmSubsystem;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
@@ -42,6 +43,7 @@ public class RobotContainer {
   public final static PneumaticSubsystem pneumaticSubsystem = new PneumaticSubsystem();
   public final static IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
   public final static SmartDashboardSubsystem smartDashboardSubsystem = new SmartDashboardSubsystem();
+  public final static ArmSubsystem armSubsystem = new ArmSubsystem();
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
   private final CommandXboxController m_driverController =

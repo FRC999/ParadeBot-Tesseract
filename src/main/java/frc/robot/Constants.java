@@ -31,7 +31,7 @@ public final class Constants {
 	public static final double I_TILT = 0.0002;
 	public static final double D_TILT = 0.8;
 	public final static double F_TILT = 0;
-	public final static int absoluteEncoderZeroValue = 1830; //TODO: Calibrate this
+	public final static int absoluteEncoderZeroValue = 2255;
   }
   public static class PneumaticConstants {
 	public static final int COMPRESSOR_MODULE = 13;
