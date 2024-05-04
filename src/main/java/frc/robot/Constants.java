@@ -31,6 +31,7 @@ public final class Constants {
 	public static final double I_TILT = 0.0002;
 	public static final double D_TILT = 0.8;
 	public final static double F_TILT = 0;
+	public final static int absoluteEncoderZeroValue = 1830; //TODO: Calibrate this
   }
   public static class PneumaticConstants {
 	public static final int COMPRESSOR_MODULE = 13;
@@ -69,7 +70,7 @@ public final class Constants {
 					5, // Port Number for Xbox controller
 					ControllerDeviceType.XBOX,
 					0.03, // deadband X for Xbox
-					0.03, // deadband Y for Xbox //TODO: ALL DEADBAND FOR XBOX IS PLACEHOLDER
+					0.03, // deadband Y for Xbox //ALL DEADBAND FOR XBOX IS PLACEHOLDER
 					0.03, // deadband Omega for Xbox
 					false, // No cube controller configuration for Xbox yet
 					false);
