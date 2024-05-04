@@ -19,6 +19,6 @@ public class RotateIntakeCommand extends InstantCommand {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    RobotContainer.intakeSubsystem.rotateSpeed(0.1);
+    RobotContainer.intakeSubsystem.rotateSpeed(0.4);
   }
 }
