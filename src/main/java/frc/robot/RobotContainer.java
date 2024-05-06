@@ -22,7 +22,7 @@ import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.PneumaticSubsystem;
 import frc.robot.subsystems.SmartDashboardSubsystem;
-import edu.wpi.first.wpilibj.XboxController;
+//import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
@@ -121,11 +121,11 @@ public class RobotContainer {
   }
 
   public void testRotator() {
-    new JoystickButton(driveController, 4)
-      .onTrue(new InstantCommand(() -> RobotContainer.armSubsystem.tiltHoldPosition(1830)))
+    new JoystickButton(driveController, 5)
+      .onTrue(new InstantCommand(() -> RobotContainer.armSubsystem.tiltHoldPosition(1825)))
       .onFalse(new InstantCommand(() -> RobotContainer.armSubsystem.tiltMoveWithPower(0.0)));
 
-    new JoystickButton(driveController, 5)
+    new JoystickButton(driveController, 6)
       .onTrue(new InstantCommand(() -> RobotContainer.armSubsystem.tiltHoldPosition(0)))
       .onFalse(new InstantCommand(() -> RobotContainer.armSubsystem.tiltMoveWithPower(0.0)));
   }

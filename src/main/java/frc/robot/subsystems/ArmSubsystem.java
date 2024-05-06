@@ -65,6 +65,10 @@ public class ArmSubsystem extends SubsystemBase {
         intakeRotator.setSelectedSensorPosition((getTiltAbsoluteEncoder()-Constants.ShooterConstants.absoluteEncoderZeroValue));
   }
 
+  public int getTiltRelativeEncoder() {
+    return (int) intakeRotator.getSelectedSensorPosition();
+  }
+
   public int getTiltAbsoluteEncoder() {
     return (int) intakeRotator.getSensorCollection().getPulseWidthPosition() & 0xFFF;
   }

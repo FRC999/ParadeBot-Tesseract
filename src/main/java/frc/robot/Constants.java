@@ -24,7 +24,7 @@ public final class Constants {
 	public static final int PID_TILT = 0;
 	public static final int configureTimeoutMs = 30;
 	public static final boolean tiltEncoderSensorPhase = false;
-	public static final double PeakOutput = 0.4;
+	public static final double PeakOutput = 1.0;
 	public static final int tiltDefaultAcceptableError = 1;
 	public static final int SLOT_0 = 0;
 	public static final double P_TILT = 0.8;
