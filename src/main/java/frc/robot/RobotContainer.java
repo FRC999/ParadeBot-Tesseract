@@ -57,7 +57,8 @@ public class RobotContainer {
     configureDriverInterface();
     configureBindings();
     testClaw();
-    testIntake();
+    //testIntake();
+    testRotator();
     driveSubsystem.setDefaultCommand(
       new DriveManuallyCommand(
         () -> getDriverXAxis(),
@@ -117,7 +118,16 @@ public class RobotContainer {
     new JoystickButton(driveController, 6)
       .onTrue(new RobotIntakeReverseCommand())
       .onFalse(new IntakeStopCommand());
+  }
 
+  public void testRotator() {
+    new JoystickButton(driveController, 4)
+      .onTrue(new InstantCommand(() -> RobotContainer.armSubsystem.tiltHoldPosition(1830)))
+      .onFalse(new InstantCommand(() -> RobotContainer.armSubsystem.tiltMoveWithPower(0.0)));
+
+    new JoystickButton(driveController, 5)
+      .onTrue(new InstantCommand(() -> RobotContainer.armSubsystem.tiltHoldPosition(0)))
+      .onFalse(new InstantCommand(() -> RobotContainer.armSubsystem.tiltMoveWithPower(0.0)));
   }
 
   private double getDriverXAxis() {

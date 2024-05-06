@@ -6,6 +6,7 @@
 package frc.robot.subsystems;
 
 
+import com.ctre.phoenix.motorcontrol.TalonSRXControlMode;
 import com.ctre.phoenix.motorcontrol.TalonSRXFeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
@@ -66,6 +67,14 @@ public class ArmSubsystem extends SubsystemBase {
 
   public int getTiltAbsoluteEncoder() {
     return (int) intakeRotator.getSensorCollection().getPulseWidthPosition() & 0xFFF;
+  }
+
+  public void tiltMoveWithPower(double power) {
+    intakeRotator.set(TalonSRXControlMode.PercentOutput, power);
+  }
+
+  public void tiltHoldPosition(int position) {
+    intakeRotator.set(TalonSRXControlMode.Position, position);
   }
 
 
