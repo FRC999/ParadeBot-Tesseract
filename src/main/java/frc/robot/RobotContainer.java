@@ -57,7 +57,7 @@ public class RobotContainer {
     configureDriverInterface();
     configureBindings();
     testClaw();
-    //testIntake();
+    testIntake();
     testRotator();
     driveSubsystem.setDefaultCommand(
       new DriveManuallyCommand(
@@ -121,11 +121,11 @@ public class RobotContainer {
   }
 
   public void testRotator() {
-    new JoystickButton(driveController, 5)
+    new JoystickButton(driveController, 7)
       .onTrue(new InstantCommand(() -> RobotContainer.armSubsystem.tiltHoldPosition(1825)))
       .onFalse(new InstantCommand(() -> RobotContainer.armSubsystem.tiltMoveWithPower(0.0)));
 
-    new JoystickButton(driveController, 6)
+    new JoystickButton(driveController, 8)
       .onTrue(new InstantCommand(() -> RobotContainer.armSubsystem.tiltHoldPosition(0)))
       .onFalse(new InstantCommand(() -> RobotContainer.armSubsystem.tiltMoveWithPower(0.0)));
   }
