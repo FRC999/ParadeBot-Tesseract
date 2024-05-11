@@ -29,6 +29,11 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 
+//TODO: lol
+//TODO: Fix contant names for PID
+//TODO: Fix keybinds according to guide
+//TODO: Fix variable names according to Alex
+//TODO: Polish Code
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
