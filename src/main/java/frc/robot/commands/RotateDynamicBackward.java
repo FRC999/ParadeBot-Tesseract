@@ -7,41 +7,40 @@ package frc.robot.commands;
 import java.util.function.DoubleSupplier;
 
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.Constants.DriveConstants;
+import frc.robot.Constants;
 import frc.robot.RobotContainer;
 
-public class DriveManuallyCommand extends Command {
-  DoubleSupplier xAxis;
-  DoubleSupplier yAxis;
-  /** Creates a new DriveManuallyCommand. */
-  public DriveManuallyCommand(DoubleSupplier xAxis, DoubleSupplier yAxis) {
-    addRequirements(RobotContainer.driveSubsystem);
-    this.xAxis = xAxis;
-    this.yAxis = yAxis;
+public class RotateDynamicBackward extends Command {
+  /** Creates a new RotateDynamicForward. */
+  private DoubleSupplier xAxis;
+
+  public RotateDynamicBackward(DoubleSupplier x) {
+    addRequirements(RobotContainer.intakeSubsystem);
+    xAxis = x;
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {
-    RobotContainer.driveSubsystem.driveTrainBrakeMode();
-  }
+  public void initialize() {}
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    double move = xAxis.getAsDouble();
-    double turn = yAxis.getAsDouble();
-
-    RobotContainer.driveSubsystem.manualDrive(move, turn * DriveConstants.turnAdjust);
+    RobotContainer.intakeSubsystem.rotateSpeed(-(xAxis.getAsDouble()/2));
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    RobotContainer.intakeSubsystem.rotateSpeed(0.0);
+  }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
+    if(RobotContainer.driveController.getRawAxis(Constants.ControllerConstants.LBBUTTON) < 0.1) {
+      return true;
+    }
     return false;
   }
 }

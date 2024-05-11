@@ -5,23 +5,30 @@
 package frc.robot;
 
 import frc.robot.Constants.OIConstants.ControllerDevice;
+import frc.robot.Constants.ControllerConstants;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.commands.Autos;
 import frc.robot.commands.ClawCloseCommand;
 import frc.robot.commands.ClawOpenCommand;
 import frc.robot.commands.DriveManuallyCommand;
 import frc.robot.commands.ExampleCommand;
+import frc.robot.commands.IntakeCommandSequence;
 import frc.robot.commands.IntakeInCommand;
 import frc.robot.commands.IntakeOutCommand;
 import frc.robot.commands.IntakeStopCommand;
+import frc.robot.commands.OuttakeCommandSequence;
 import frc.robot.commands.RobotIntakeReverseCommand;
 import frc.robot.commands.RotateIntakeCommand;
+import frc.robot.commands.RotateIntakeStopCommand;
 import frc.robot.subsystems.ArmSubsystem;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.PneumaticSubsystem;
 import frc.robot.subsystems.SmartDashboardSubsystem;
+
+import java.util.function.DoubleSupplier;
+
 //import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
@@ -29,9 +36,8 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 
-//TODO: lol
 //TODO: Fix contant names for PID
-//TODO: Fix keybinds according to guide
+//Fix keybinds according to guide [done!]
 //TODO: Fix variable names according to Alex
 //TODO: Polish Code
 
@@ -61,13 +67,15 @@ public class RobotContainer {
     // Configure the trigger bindings
     configureDriverInterface();
     configureBindings();
-    testClaw();
-    testIntake();
-    testRotator();
+    //testClaw();
+    //testIntake();
+    //testRotator();
     driveSubsystem.setDefaultCommand(
       new DriveManuallyCommand(
         () -> getDriverXAxis(),
         () -> getDriverYAxis()));
+
+    paradeCommandGroup();
   }
 
   /**
@@ -79,6 +87,7 @@ public class RobotContainer {
    * PS4} controllers or {@link edu.wpi.first.wpilibj2.command.button.CommandJoystick Flight
    * joysticks}.
    */
+
   private void configureBindings() {
     // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
     new Trigger(m_exampleSubsystem::exampleCondition)
@@ -93,16 +102,33 @@ public class RobotContainer {
     driveController = new Controller(ControllerDevice.XBOX_CONTROLLER);
   }
 
-  /*
-  private void testMotors() {
-    new JoystickButton(driveController, 2) //B
-        .onTrue(new InstantCommand(() -> RobotContainer.driveSubsystem.testLeftSide(0.3)))
-        .onFalse(new InstantCommand(() -> RobotContainer.driveSubsystem.testLeftSide(0.0)));
-    new JoystickButton(driveController, 3) //X
-        .onTrue(new InstantCommand(() -> RobotContainer.driveSubsystem.testRightSide(0.3)))
-        .onFalse(new InstantCommand(() -> RobotContainer.driveSubsystem.testRightSide(0.0)));
+
+  // look at me !! ->
+  private void paradeCommandGroup() {
+    // robot intake when lt button is pressed
+    new JoystickButton(driveController, ControllerConstants.LTBUTTON)
+      .onTrue(new IntakeCommandSequence());
+
+    // robot outtake when rt button is pressed
+    new JoystickButton(driveController, ControllerConstants.RTBUTTON)
+      .onTrue(new OuttakeCommandSequence());
+
+    //primal version of touch-sensitive thing
+    new Trigger(() -> (driveController.getRawAxis(Constants.ControllerConstants.RBBUTTON) > 0.3))
+      .onTrue(new RotateIntakeCommand())
+      .onFalse(new RotateIntakeStopCommand());
+    new Trigger(() -> (driveController.getRawAxis(Constants.ControllerConstants.LBBUTTON) > 0.3))
+      .onTrue(new RobotIntakeReverseCommand())
+      .onFalse(new RotateIntakeStopCommand());
+    /*
+    new Trigger(() -> (driveController.getRawAxis(Constants.ControllerConstants.RBBUTTON) > 0))
+      .onTrue(new RotateIntakeCommand(  ()-> driveController.getRawAxis(Constants.ControllerConstants.RBBUTTON)));
+    */
   }
-  */
+
+  //test commands (ignore for parade lol)
+
+/*
   private void testClaw() {
     new JoystickButton(driveController, 2)
       .onTrue(new ClawOpenCommand());
@@ -134,6 +160,7 @@ public class RobotContainer {
       .onTrue(new InstantCommand(() -> RobotContainer.armSubsystem.tiltHoldPosition(0)))
       .onFalse(new InstantCommand(() -> RobotContainer.armSubsystem.tiltMoveWithPower(0.0)));
   }
+*/
 
   private double getDriverXAxis() {
     return driveController.getLeftStickY();
@@ -142,6 +169,7 @@ public class RobotContainer {
   private double getDriverYAxis() {
     return driveController.getRightStickX();
   }
+  
 
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.

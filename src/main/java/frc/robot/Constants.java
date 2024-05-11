@@ -39,6 +39,28 @@ public final class Constants {
 	public static final int REVERSE_CHANNEL = 2;
 	
   }
+  public static class ControllerConstants {
+	public static final int ABUTTON = 1;
+	public static final int BBUTTON = 2;
+	public static final int XBUTTON = 3;
+	public static final int YBUTTON = 4;
+
+	// L1 / R1 on ps controllers
+	public static final int LTBUTTON = 5;
+	public static final int RTBUTTON = 6;
+
+	public static final int CHANGEVIEWBUTTON = 7;
+	public static final int MENUBUTTON = 8;
+
+	// L3 / R3 on ps controllers
+	public static final int LSBUTTON = 9;
+	public static final int RSBUTTON = 10;
+	
+	// define these triggers as  new Trigger(() -> driveController.getRawAxis(Constants.ControllerConstants.[constant]) > 0.3)
+	// L2 / R2 on ps controllers
+	public static final int LBBUTTON = 2;
+	public static final int RBBUTTON = 3;
+  }
   public static class DriveConstants {
     public static final int DRIVER_CONTROLLER_PORT = 5;
     public static final boolean LEFT_MOTOR_INVERSION = true;
