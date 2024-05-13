@@ -11,6 +11,9 @@ import frc.robot.commands.Autos;
 import frc.robot.commands.ClawCloseCommand;
 import frc.robot.commands.ClawOpenCommand;
 import frc.robot.commands.DriveManuallyCommand;
+import frc.robot.commands.ElevatorMoveDown;
+import frc.robot.commands.ElevatorMoveStop;
+import frc.robot.commands.ElevatorMoveUp;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.IntakeCommandSequence;
 import frc.robot.commands.IntakeInCommand;
@@ -72,6 +75,7 @@ public class RobotContainer {
     //testClaw();
     //testIntake();
     //testRotator();
+    testElevator();
     driveSubsystem.setDefaultCommand(
       new DriveManuallyCommand(
         () -> getDriverXAxis(),
@@ -126,6 +130,16 @@ public class RobotContainer {
     new Trigger(() -> (driveController.getRawAxis(Constants.ControllerConstants.RBBUTTON) > 0))
       .onTrue(new RotateIntakeCommand(  ()-> driveController.getRawAxis(Constants.ControllerConstants.RBBUTTON)));
     */
+  }
+
+  private void testElevator() {
+    new JoystickButton(driveController, ControllerConstants.CHANGEVIEWBUTTON)
+      .onTrue(new ElevatorMoveUp())
+      .onFalse(new ElevatorMoveStop());
+      
+    new JoystickButton(driveController, ControllerConstants.MENUBUTTON)
+      .onTrue(new ElevatorMoveDown())
+      .onFalse(new ElevatorMoveStop());
   }
 
   //test commands (ignore for parade lol)
