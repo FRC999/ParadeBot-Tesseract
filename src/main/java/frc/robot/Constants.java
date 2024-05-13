@@ -76,6 +76,21 @@ public final class Constants {
     public static final int RIGHT_MOTOR_CENTER_CANID = 5;
     public static final int RIGHT_MOTOR_REAR_CANID = 6;
   }
+  public static class ElevatorConstants {
+	public static final int ELEVATORCANID = 8;
+	public static final boolean tiltMotorInvert = true;
+	public static final int PID_TILT = 0;
+	public static final int configureTimeoutMs = 30;
+	public static final boolean tiltEncoderSensorPhase = true;
+	public static final double PeakOutput = 0.4;
+	public static final int tiltDefaultAcceptableError = 1;
+	public static final int SLOT_0 = 0;
+	public static final double P_TILT = 0.8;
+	public static final double I_TILT = 0.0002;
+	public static final double D_TILT = 0.8;
+	public final static double F_TILT = 0;
+	public final static int absoluteEncoderZeroValue = 2270;
+  }
   public static final class OIConstants {
 		public static final int driverControllerPort = 0;
 
