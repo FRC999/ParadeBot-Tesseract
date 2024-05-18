@@ -62,9 +62,9 @@ public class ElevatorSubsystem extends SubsystemBase {
             Constants.ElevatorConstants.configureTimeoutMs);
 
 
-        elevatorMotor.setSelectedSensorPosition((getTiltAbsoluteEncoder()-Constants.ElevatorConstants.absoluteEncoderZeroValue));
+      //  elevatorMotor.setSelectedSensorPosition((getTiltAbsoluteEncoder()-Constants.ElevatorConstants.absoluteEncoderZeroValue));
   }
-
+  /* 
   public int getTiltRelativeEncoder() {
     return (int) elevatorMotor.getSelectedSensorPosition();
   }
@@ -80,7 +80,7 @@ public class ElevatorSubsystem extends SubsystemBase {
   public void tiltHoldPosition(int position) {
     elevatorMotor.set(TalonSRXControlMode.Position, position);
   }
-
+*/
   @Override
   public void periodic() {
     // This method will be called once per scheduler run

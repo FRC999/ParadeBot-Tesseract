@@ -17,68 +17,79 @@ import frc.robot.Constants;
 
 public class ArmSubsystem extends SubsystemBase {
   /** Creates a new ArmSubsystem. */
-  private WPI_TalonSRX intakeRotator = new WPI_TalonSRX(Constants.IntakeConstants.INTAKE_ROTATOR_MOTOR_CANID);
+private WPI_TalonSRX armMotor = new WPI_TalonSRX(Constants.ArmConstants.ARM_MOTOR_CANID);
+
+double relativePosition = getAngleRelativeEncoder() - Constants.ArmConstants.absoluteEncoderZeroValue;
 
   public ArmSubsystem() {
-    configureRotatorMotor();
+    configureArmMotor();
   }
 
 
-  public void configureRotatorMotor() {
-    intakeRotator.configFactoryDefault();
+  public void configureArmMotor() {
+    armMotor.configFactoryDefault();
 
 
-        intakeRotator.setInverted(Constants.ShooterConstants.tiltMotorInvert);
+        armMotor.setInverted(Constants.ArmConstants.armMotorInvert);
 
 
-        intakeRotator.configSelectedFeedbackSensor(TalonSRXFeedbackDevice.CTRE_MagEncoder_Absolute,
-            Constants.ShooterConstants.PID_TILT,
-            Constants.ShooterConstants.configureTimeoutMs);
+        armMotor.configSelectedFeedbackSensor(TalonSRXFeedbackDevice.CTRE_MagEncoder_Absolute,
+            Constants.ArmConstants.PID_ARM,
+            Constants.ArmConstants.configureTimeoutMs);
 
 
-        intakeRotator.setSensorPhase(Constants.ShooterConstants.tiltEncoderSensorPhase);
+        armMotor.setSensorPhase(Constants.ArmConstants.armEncoderSensorPhase);
 
 
-        intakeRotator.configPeakOutputForward(Constants.ShooterConstants.PeakOutput,
-            Constants.ShooterConstants.configureTimeoutMs);
-        intakeRotator.configPeakOutputReverse(Constants.ShooterConstants.PeakOutput * (-1),
-            Constants.ShooterConstants.configureTimeoutMs);
-        intakeRotator.configNominalOutputForward(0, Constants.ShooterConstants.configureTimeoutMs);
-        intakeRotator.configNominalOutputReverse(0, Constants.ShooterConstants.configureTimeoutMs);
+        armMotor.configPeakOutputForward(Constants.ArmConstants.PeakOutput,
+            Constants.ArmConstants.configureTimeoutMs);
+        armMotor.configPeakOutputReverse(Constants.ArmConstants.PeakOutput * (-1),
+            Constants.ArmConstants.configureTimeoutMs);
+        armMotor.configNominalOutputForward(0, Constants.ArmConstants.configureTimeoutMs);
+        armMotor.configNominalOutputReverse(0, Constants.ArmConstants.configureTimeoutMs);
 
 
-        intakeRotator.configAllowableClosedloopError(Constants.ShooterConstants.SLOT_0,
-            Constants.ShooterConstants.tiltDefaultAcceptableError,
-            Constants.ShooterConstants.configureTimeoutMs);
+        armMotor.configAllowableClosedloopError(Constants.ArmConstants.SLOT_0,
+            Constants.ArmConstants.armDefaultAcceptableError,
+            Constants.ArmConstants.configureTimeoutMs);
 
 
-        intakeRotator.config_kP(Constants.ShooterConstants.SLOT_0, Constants.ShooterConstants.P_TILT,
-            Constants.ShooterConstants.configureTimeoutMs);
-        intakeRotator.config_kI(Constants.ShooterConstants.SLOT_0, Constants.ShooterConstants.I_TILT,
-            Constants.ShooterConstants.configureTimeoutMs);
-        intakeRotator.config_kD(Constants.ShooterConstants.SLOT_0, Constants.ShooterConstants.D_TILT,
-            Constants.ShooterConstants.configureTimeoutMs);
-        intakeRotator.config_kF(Constants.ShooterConstants.SLOT_0, Constants.ShooterConstants.F_TILT,
-            Constants.ShooterConstants.configureTimeoutMs);
+        armMotor.config_kP(Constants.ArmConstants.SLOT_0, Constants.ArmConstants.P_ARM,
+            Constants.ArmConstants.configureTimeoutMs);
+        armMotor.config_kI(Constants.ArmConstants.SLOT_0, Constants.ArmConstants.I_ARM,
+            Constants.ArmConstants.configureTimeoutMs);
+        armMotor.config_kD(Constants.ArmConstants.SLOT_0, Constants.ArmConstants.D_ARM,
+            Constants.ArmConstants.configureTimeoutMs);
+        armMotor.config_kF(Constants.ArmConstants.SLOT_0, Constants.ArmConstants.F_ARM,
+            Constants.ArmConstants.configureTimeoutMs);
 
 
-        intakeRotator.setSelectedSensorPosition((getTiltAbsoluteEncoder()-Constants.ShooterConstants.absoluteEncoderZeroValue));
+        armMotor.setSelectedSensorPosition((getAngleAbsoluteEncoder()-Constants.ArmConstants.absoluteEncoderZeroValue));
   }
 
-  public int getTiltRelativeEncoder() {
-    return (int) intakeRotator.getSelectedSensorPosition();
+  public int getAngleRelativeEncoder() {
+   // return (int) armMotor.getSelectedSensorPosition();
+    return (int) armMotor.getSensorCollection().getPulseWidthPosition() & 0xFFF;
   }
 
-  public int getTiltAbsoluteEncoder() {
-    return (int) intakeRotator.getSensorCollection().getPulseWidthPosition() & 0xFFF;
+  public void calibrateRelativeEncoder() {
+    relativePosition = (Constants.ArmConstants.armMotorInvert^Constants.ArmConstants.armEncoderSensorPhase)?-relativePosition:relativePosition; 
+    armMotor.setSelectedSensorPosition(relativePosition);
+    System.out.println("*** Set relative encoder for Arm motor to " + relativePosition);
+   }
+  
+
+  public double getAngleAbsoluteEncoder() {
+    return relativePosition;
   }
 
-  public void tiltMoveWithPower(double power) {
-    intakeRotator.set(TalonSRXControlMode.PercentOutput, power);
+  public void armMoveWithPower(double power) {
+    armMotor.set(TalonSRXControlMode.PercentOutput, power);
   }
 
-  public void tiltHoldPosition(int position) {
-    intakeRotator.set(TalonSRXControlMode.Position, position);
+  public void holdArmAnglePosition(int position) {
+    //armMotor.set(TalonSRXControlMode.Position, position);
+    armMotor.set(TalonSRXControlMode.PercentOutput, Constants.ArmConstants.armHoldingPower);
   }
 
   @Override

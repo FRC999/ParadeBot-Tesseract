@@ -14,17 +14,23 @@ public class IntakeSubsystem extends SubsystemBase {
   /** Creates a new IntakeSubsystem. */
   private WPI_TalonSRX leftIntake = new WPI_TalonSRX(Constants.IntakeConstants.LEFT_INTAKE_MOTOR_CANID);
   private WPI_TalonSRX rightIntake = new WPI_TalonSRX(Constants.IntakeConstants.RIGHT_INTAKE_MOTOR_CANID);
-  private WPI_TalonSRX intakeRotator = new WPI_TalonSRX(Constants.IntakeConstants.INTAKE_ROTATOR_MOTOR_CANID);
+  //private WPI_TalonSRX intakeRotator = new WPI_TalonSRX(Constants.IntakeConstants.INTAKE_ROTATOR_MOTOR_CANID);
 
   public IntakeSubsystem() {
     configureMotors();
-    driveTrainBrakeMode();
+    intakeBrakeMode();
   }
 
-  public int getEncoder() {
-    int encoderValue = (int) intakeRotator.getSelectedSensorPosition();
-    //System.out.println("ENCODER VALUE:" + encoderValue);
-    return encoderValue;
+  public int getLeftEncoderValue() {
+    int lencoderValue = (int) leftIntake.getSelectedSensorPosition();
+    System.out.println("ENCODER VALUE:" + lencoderValue);
+    return lencoderValue;
+  }
+
+  public int getRightEncoderValue() {
+    int rencoderValue = (int) rightIntake.getSelectedSensorPosition();
+    System.out.println("ENCODER VALUE:" + rencoderValue);
+    return rencoderValue;
   }
 
   private void configureMotors() {
@@ -32,7 +38,7 @@ public class IntakeSubsystem extends SubsystemBase {
     // reset all motors
     leftIntake.configFactoryDefault();
     rightIntake.configFactoryDefault();
-    intakeRotator.configFactoryDefault();
+    //intakeRotator.configFactoryDefault();
 
     leftIntake.setInverted(false);
     rightIntake.setInverted(true);
@@ -40,19 +46,20 @@ public class IntakeSubsystem extends SubsystemBase {
 
   }
 
-  public void driveTrainBrakeMode() {
+  public void intakeBrakeMode() {
     leftIntake.setNeutralMode(NeutralMode.Brake);
     rightIntake.setNeutralMode(NeutralMode.Brake);
-    intakeRotator.setNeutralMode(NeutralMode.Brake);
+    //intakeRotator.setNeutralMode(NeutralMode.Brake);
   }
 
   public void intakeSpeed(double power) {
     leftIntake.set(power);
   }
 
-  public void rotateSpeed(double power) {
-    intakeRotator.set(power);
+  /*public void rotateSpeed(double power) {     //this is for rotating the arm
+   intakeRotator.set(power);
   }
+  */
 
   @Override
   public void periodic() {
