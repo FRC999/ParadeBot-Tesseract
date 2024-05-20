@@ -18,6 +18,6 @@ public class ElevatorMoveDown extends InstantCommand {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    RobotContainer.elevatorSubsystem.tiltMoveWithPower(-0.2);
+    RobotContainer.elevatorSubsystem.elevatorMoveWithPower(-0.2);
   }
 } //temp

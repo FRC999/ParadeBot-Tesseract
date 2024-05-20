@@ -10,11 +10,11 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
 import frc.robot.RobotContainer;
 
-public class RotateDynamicBackward extends Command {
+public class IntakeTakeCubeJoystickPower extends Command {
   /** Creates a new RotateDynamicForward. */
   private DoubleSupplier xAxis;
 
-  public RotateDynamicBackward(DoubleSupplier x) {
+  public IntakeTakeCubeJoystickPower(DoubleSupplier x) {
     addRequirements(RobotContainer.intakeSubsystem);
     xAxis = x;
   }
@@ -26,13 +26,13 @@ public class RotateDynamicBackward extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    RobotContainer.intakeSubsystem.rotateSpeed(-(xAxis.getAsDouble()/2));
+    RobotContainer.intakeSubsystem.setIntakePower(-(xAxis.getAsDouble()/2));
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    RobotContainer.intakeSubsystem.rotateSpeed(0.0);
+    RobotContainer.intakeSubsystem.setIntakePower(0.0);
   }
 
   // Returns true when the command should end.

@@ -22,15 +22,19 @@ public class IntakeSubsystem extends SubsystemBase {
   }
 
   public int getLeftEncoderValue() {
-    int lencoderValue = (int) leftIntake.getSelectedSensorPosition();
-    System.out.println("ENCODER VALUE:" + lencoderValue);
-    return lencoderValue;
+    return  (int)leftIntake.getSelectedSensorPosition();
   }
 
   public int getRightEncoderValue() {
-    int rencoderValue = (int) rightIntake.getSelectedSensorPosition();
-    System.out.println("ENCODER VALUE:" + rencoderValue);
-    return rencoderValue;
+    return (int)rightIntake.getSelectedSensorPosition();
+  }
+
+  public double getLeftEncoderVelocity() {
+    return  leftIntake.getSelectedSensorVelocity();
+  }
+
+  public double getRightEncoderVelocity() {
+    return rightIntake.getSelectedSensorVelocity();
   }
 
   private void configureMotors() {
@@ -52,7 +56,7 @@ public class IntakeSubsystem extends SubsystemBase {
     //intakeRotator.setNeutralMode(NeutralMode.Brake);
   }
 
-  public void intakeSpeed(double power) {
+  public void setIntakePower(double power) {
     leftIntake.set(power);
   }
 

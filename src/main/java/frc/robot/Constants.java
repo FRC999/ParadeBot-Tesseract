@@ -108,17 +108,17 @@ public final class Constants {
 
 	public static class ElevatorConstants {
 		public static final int ELEVATORCANID = 8;
-		public static final boolean tiltMotorInvert = true;
-		public static final int PID_TILT = 0;
+		public static final boolean elevatorMotorInvert = true;
+		public static final int PID_ELEVATOR = 0;
 		public static final int configureTimeoutMs = 30;
-		public static final boolean tiltEncoderSensorPhase = true;
+		public static final boolean elevatorEncoderSensorPhase = true;
 		public static final double PeakOutput = 0.4;
-		public static final int tiltDefaultAcceptableError = 1;
+		public static final int elevatorDefaultAcceptableError = 1;
 		public static final int SLOT_0 = 0;
-		public static final double P_TILT = 0.8;
-		public static final double I_TILT = 0.0002;
-		public static final double D_TILT = 0.8;
-		public final static double F_TILT = 0;
+		public static final double P_ELEVATOR = 0.8;
+		public static final double I_ELEVATOR = 0.0002;
+		public static final double D_ELEVATOR = 0.8;
+		public final static double F_ELEVATOR = 0;
 		public final static int absoluteEncoderZeroValue = 2270;
 	}
 

@@ -13,19 +13,22 @@ public class SmartDashboardSubsystem extends SubsystemBase {
   public SmartDashboardSubsystem() {
   }
 
-  public void updateEncoder() {
-    SmartDashboard.putNumber("relative encoder value", RobotContainer.armSubsystem.getAngleRelativeEncoder());
-    SmartDashboard.putNumber("absolute encoder value", RobotContainer.armSubsystem.getAngleAbsoluteEncoder());
+  public void updateArmTelemetry() {
+    SmartDashboard.putNumber("Arm relative encoder value", RobotContainer.armSubsystem.getAngleRelativeEncoder());
+    SmartDashboard.putNumber("Arm absolute encoder value", RobotContainer.armSubsystem.getAngleAbsoluteEncoder());
+  }
+
+  public void updateIntakeTelemetry() {
+    SmartDashboard.putNumber("Intake Left encoder value", RobotContainer.intakeSubsystem.getLeftEncoderValue());
+    SmartDashboard.putNumber("Intake Right encoder value", RobotContainer.intakeSubsystem.getRightEncoderValue());
   }
 
   public void updateAllDisplays() {
-    updateEncoder();
+    updateArmTelemetry();
   }
 
   @Override
   public void periodic() {
     updateAllDisplays();
-    SmartDashboard.putNumber("relative encoder value", RobotContainer.intakeSubsystem.getEncoder());
-    SmartDashboard.putNumber("absolute encoder value", RobotContainer.armSubsystem.getAngleAbsoluteEncoder());
-  }
+   }
 }

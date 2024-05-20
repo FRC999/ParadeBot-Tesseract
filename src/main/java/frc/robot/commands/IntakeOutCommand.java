@@ -18,6 +18,6 @@ public class IntakeOutCommand extends InstantCommand {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    RobotContainer.intakeSubsystem.intakeSpeed(Constants.IntakeConstants.INTAKE_SPEED);
+    RobotContainer.intakeSubsystem.setIntakePower(Constants.IntakeConstants.INTAKE_SPEED);
   }
 }

@@ -20,9 +20,8 @@ import frc.robot.commands.IntakeInCommand;
 import frc.robot.commands.IntakeOutCommand;
 import frc.robot.commands.IntakeStopCommand;
 import frc.robot.commands.OuttakeCommandSequence;
-import frc.robot.commands.RobotIntakeReverseCommand;
-import frc.robot.commands.RotateIntakeCommand;
-import frc.robot.commands.RotateIntakeStopCommand;
+import frc.robot.commands.IntakeTakeCube;
+import frc.robot.commands.ArmRotateCommand;
 import frc.robot.subsystems.ArmSubsystem;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.ElevatorSubsystem;
@@ -121,11 +120,11 @@ public class RobotContainer {
 
     //primal version of touch-sensitive thing
     new Trigger(() -> (driveController.getRawAxis(Constants.ControllerConstants.RBBUTTON) > 0.3))
-      .onTrue(new RotateIntakeCommand())
-      .onFalse(new RotateIntakeStopCommand());
+      .onTrue(new ArmRotateCommand())
+      .onFalse(new IntakeStopCommand());
     new Trigger(() -> (driveController.getRawAxis(Constants.ControllerConstants.LBBUTTON) > 0.3))
-      .onTrue(new RobotIntakeReverseCommand())
-      .onFalse(new RotateIntakeStopCommand());
+      .onTrue(new IntakeTakeCube())
+      .onFalse(new IntakeStopCommand());
     /*
     new Trigger(() -> (driveController.getRawAxis(Constants.ControllerConstants.RBBUTTON) > 0))
       .onTrue(new RotateIntakeCommand(  ()-> driveController.getRawAxis(Constants.ControllerConstants.RBBUTTON)));

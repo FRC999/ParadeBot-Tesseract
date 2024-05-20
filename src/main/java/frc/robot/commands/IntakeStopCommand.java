@@ -18,7 +18,6 @@ public class IntakeStopCommand extends InstantCommand {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    RobotContainer.intakeSubsystem.intakeSpeed(0);
-    RobotContainer.intakeSubsystem.rotateSpeed(0);
+    RobotContainer.intakeSubsystem.setIntakePower(0);
   }
 }
