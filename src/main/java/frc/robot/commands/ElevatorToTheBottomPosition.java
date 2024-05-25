@@ -8,18 +8,17 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
 import frc.robot.RobotContainer;
 
-public class ArmToFrontCommand extends Command {
-  /** Creates a new ArmToFrontCommand. */
-  private double tolerance = 100;
-  public ArmToFrontCommand() {
+public class ElevatorToTheBottomPosition extends Command {
+  /** Creates a new ElevatorTopPosition. */
+  public ElevatorToTheBottomPosition() {
+    addRequirements(RobotContainer.elevatorSubsystem);
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(RobotContainer.armSubsystem);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    RobotContainer.armSubsystem.ArmMoveToPositionWithPID(Constants.ArmConstants.armFrontPosition);
+    RobotContainer.elevatorSubsystem.elevatorMoveToPositionWithPID(Constants.ElevatorConstants.elevatorDownPosition);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -29,12 +28,16 @@ public class ArmToFrontCommand extends Command {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    System.out.println("ArmToFrontCommand finished: " + interrupted);
+    RobotContainer.elevatorSubsystem.elevatorMoveWithPower(0);
+    System.out.println("Elevator to the bottom position command ended:" + interrupted);
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return Math.abs(RobotContainer.armSubsystem.getAngleRelativeEncoder()-Constants.ArmConstants.armFrontPosition)<=tolerance;
+    return (Math.abs(RobotContainer.elevatorSubsystem
+    .getElevatorRelativeEncoder() - Constants.ElevatorConstants.elevatorDownPosition) <=
+    Constants.ElevatorConstants.tolerance) || (Math.abs(RobotContainer.elevatorSubsystem
+    .getElevatorCurrentRecord()) > Constants.ElevatorConstants.stallCurrent) ;
   }
 }

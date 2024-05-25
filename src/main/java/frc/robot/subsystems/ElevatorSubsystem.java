@@ -73,7 +73,7 @@ public class ElevatorSubsystem extends SubsystemBase {
    elevatorMotor.set(TalonSRXControlMode.PercentOutput, power);
   }
    
-  public void elevatorHoldPosition(double position) {
+  public void elevatorMoveToPositionWithPID(double position) {
    elevatorMotor.set(TalonSRXControlMode.Position, position);
   }
 

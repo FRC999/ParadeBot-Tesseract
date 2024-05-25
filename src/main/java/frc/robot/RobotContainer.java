@@ -14,6 +14,8 @@ import frc.robot.commands.PneuClawOpenCommand;
 import frc.robot.commands.DriveManuallyCommand;
 import frc.robot.commands.ElevatorDownWithPowerCommand;
 import frc.robot.commands.ElevatorStopCommand;
+import frc.robot.commands.ElevatorToTheBottomPosition;
+import frc.robot.commands.ElevatorToTheTopPosition;
 import frc.robot.commands.ElevatorUpWithPowerCommand;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.IntakeCommandSequence;
@@ -80,7 +82,7 @@ public class RobotContainer {
         () -> getDriverXAxis(),
         () -> getDriverYAxis()));
 
-    paradeCommandGroup();
+    
   }
 
   /**
@@ -103,7 +105,8 @@ public class RobotContainer {
     //m_driverController.b().whileTrue(m_exampleSubsystem.exampleMethodCommand());
 
     //testArm();
-    testElevator();
+    //testElevator();
+    paradeCommandGroup();
   }
 
   private void configureDriverInterface() {
@@ -173,6 +176,12 @@ public class RobotContainer {
       .onFalse(new ElevatorStopCommand());
     new JoystickButton(driveController, 1)
       .onTrue(new CalibrateElevatorCommand())
+      .onFalse(new ElevatorStopCommand());
+    new JoystickButton(driveController, 4)
+      .onTrue(new ElevatorToTheTopPosition())
+      .onFalse(new ElevatorStopCommand());
+    new JoystickButton(driveController, 5)
+      .onTrue(new ElevatorToTheBottomPosition())
       .onFalse(new ElevatorStopCommand());
   }
 

@@ -83,10 +83,12 @@ private WPI_TalonSRX armMotor;
     armMotor.set(TalonSRXControlMode.PercentOutput, power);
   }
 
-  public void holdArmAnglePosition(double position) {
+  public void ArmMoveToPositionWithPID(double position) {
     armMotor.set(TalonSRXControlMode.Position, position);
     //armMotor.set(TalonSRXControlMode.PercentOutput, Constants.ArmConstants.armHoldingPower);
   }
+
+
 
   @Override
   public void periodic() {

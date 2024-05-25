@@ -19,7 +19,7 @@ public class ArmToBackCommand extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    RobotContainer.armSubsystem.holdArmAnglePosition(Constants.ArmConstants.armBackPosition);
+    RobotContainer.armSubsystem.ArmMoveToPositionWithPID(Constants.ArmConstants.armBackPosition);
   }
 
   // Called every time the scheduler runs while the command is scheduled.

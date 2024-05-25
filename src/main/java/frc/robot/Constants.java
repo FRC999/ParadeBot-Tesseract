@@ -118,12 +118,13 @@ public final class Constants {
 		public static final double elevatorUp = 0.4;
 		public static final double elevatorDown = -0.4;
 		public static final double elevatorCalibrationZeroPosition = -270;
-		public static final double elevatorTopPosition = 15200;
+		public static final double tolerance = 100; 
+		public static final double elevatorTopPosition = 14600;
 		public static final double elevatorDownPosition = 0;
 		public static final int elevatorDefaultAcceptableError = 1;
 		public static final int SLOT_0 = 0;
 		public static final double P_ELEVATOR = 0.8;
-		public static final double I_ELEVATOR = 0.0002;
+		public static final double I_ELEVATOR = 0.0;
 		public static final double D_ELEVATOR = 0.8;
 		public final static double F_ELEVATOR = 0;
 		public final static int absoluteEncoderZeroValue = 2270;

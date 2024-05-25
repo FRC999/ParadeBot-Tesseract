@@ -30,7 +30,7 @@ public class CalibrateElevatorCommand extends Command {
   public void end(boolean interrupted) {
     RobotContainer.elevatorSubsystem.elevatorMoveWithPower(0);
     RobotContainer.elevatorSubsystem.resetElevatorEncoder();
-    System.out.println("Command Ended:" + interrupted);
+    System.out.println("Calibrate Elevator Command Ended:" + interrupted);
   }
 
   // Returns true when the command should end.
