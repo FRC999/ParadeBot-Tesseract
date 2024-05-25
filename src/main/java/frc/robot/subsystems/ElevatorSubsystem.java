@@ -14,9 +14,10 @@ import frc.robot.Constants.ElevatorConstants;
 
 public class ElevatorSubsystem extends SubsystemBase {
   /** Creates a new ArmSubsystem. */
-  private WPI_TalonSRX elevatorMotor = new WPI_TalonSRX(Constants.ElevatorConstants.ELEVATORCANID);
+  private WPI_TalonSRX elevatorMotor;
 
   public ElevatorSubsystem() {
+    elevatorMotor = new WPI_TalonSRX(Constants.ElevatorConstants.ELEVATORCANID);
     configureElevatorMotor();
   }
 
@@ -55,12 +56,12 @@ public class ElevatorSubsystem extends SubsystemBase {
   }
 
   
-  public int getElevatorRelativeEncoder() {
-   return (int) elevatorMotor.getSelectedSensorPosition();
+  public double getElevatorRelativeEncoder() {
+   return elevatorMotor.getSelectedSensorPosition();
   }
    
-  public int getElevatorAbsoluteEncoder() {
-   return (int) elevatorMotor.getSensorCollection().getPulseWidthPosition() &
+  public double getElevatorAbsoluteEncoder() {
+   return elevatorMotor.getSensorCollection().getPulseWidthPosition() &
    0xFFF;
   }
    
@@ -68,7 +69,7 @@ public class ElevatorSubsystem extends SubsystemBase {
    elevatorMotor.set(TalonSRXControlMode.PercentOutput, power);
   }
    
-  public void elevatorHoldPosition(int position) {
+  public void elevatorHoldPosition(double position) {
    elevatorMotor.set(TalonSRXControlMode.Position, position);
   }
   

@@ -13,6 +13,11 @@ public class SmartDashboardSubsystem extends SubsystemBase {
   public SmartDashboardSubsystem() {
   }
 
+  public void updateElevatorTelemetry() {
+    SmartDashboard.putNumber("Elevator relative encoder value", RobotContainer.elevatorSubsystem.getElevatorRelativeEncoder());
+    SmartDashboard.putNumber("Elevator absolute encoder value", RobotContainer.elevatorSubsystem.getElevatorAbsoluteEncoder());
+  }
+
   public void updateArmTelemetry() {
     SmartDashboard.putNumber("Arm relative encoder value", RobotContainer.armSubsystem.getAngleRelativeEncoder());
     SmartDashboard.putNumber("Arm absolute encoder value", RobotContainer.armSubsystem.getAngleAbsoluteEncoder());
@@ -25,6 +30,7 @@ public class SmartDashboardSubsystem extends SubsystemBase {
 
   public void updateAllDisplays() {
     updateArmTelemetry();
+    updateElevatorTelemetry();
   }
 
   @Override
