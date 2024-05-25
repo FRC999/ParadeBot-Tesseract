@@ -8,8 +8,8 @@ import frc.robot.Constants.OIConstants.ControllerDevice;
 import frc.robot.Constants.ControllerConstants;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.commands.Autos;
-import frc.robot.commands.ClawCloseCommand;
-import frc.robot.commands.ClawOpenCommand;
+import frc.robot.commands.PneuClawCloseCommand;
+import frc.robot.commands.PneuClawOpenCommand;
 import frc.robot.commands.DriveManuallyCommand;
 import frc.robot.commands.ElevatorMoveDown;
 import frc.robot.commands.ElevatorMoveStop;
@@ -21,7 +21,10 @@ import frc.robot.commands.IntakeOutCommand;
 import frc.robot.commands.IntakeStopCommand;
 import frc.robot.commands.OuttakeCommandSequence;
 import frc.robot.commands.IntakeTakeCube;
+import frc.robot.commands.ArmRelaxCommand;
 import frc.robot.commands.ArmRotateCommand;
+import frc.robot.commands.ArmToBackCommand;
+import frc.robot.commands.ArmToFrontCommand;
 import frc.robot.subsystems.ArmSubsystem;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.ElevatorSubsystem;
@@ -61,8 +64,8 @@ public class RobotContainer {
   public final static ElevatorSubsystem elevatorSubsystem = new ElevatorSubsystem();
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
-  private final CommandXboxController m_driverController =
-      new CommandXboxController(DriveConstants.DRIVER_CONTROLLER_PORT);
+  //private final CommandXboxController m_driverController =
+   //   new CommandXboxController(DriveConstants.DRIVER_CONTROLLER_PORT);
 
   public static Controller driveController;
 
@@ -71,10 +74,6 @@ public class RobotContainer {
     // Configure the trigger bindings
     configureDriverInterface();
     configureBindings();
-    //testClaw();
-    //testIntake();
-    //testRotator();
-    testElevator();
     driveSubsystem.setDefaultCommand(
       new DriveManuallyCommand(
         () -> getDriverXAxis(),
@@ -100,7 +99,9 @@ public class RobotContainer {
 
     // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,
     // cancelling on release.
-    m_driverController.b().whileTrue(m_exampleSubsystem.exampleMethodCommand());
+    //m_driverController.b().whileTrue(m_exampleSubsystem.exampleMethodCommand());
+
+    //testArm();
   }
 
   private void configureDriverInterface() {
@@ -143,15 +144,24 @@ public class RobotContainer {
 
   //test commands (ignore for parade lol)
 
-/*
+
   private void testClaw() {
     new JoystickButton(driveController, 2)
-      .onTrue(new ClawOpenCommand());
+      .onTrue(new PneuClawCloseCommand());
     new JoystickButton(driveController, 3)
-      .onTrue(new ClawCloseCommand());
+      .onTrue(new PneuClawOpenCommand());
   }
 
-  public void testIntake() {
+  private void testArm() {
+    new JoystickButton(driveController, 2)
+      .onTrue(new ArmToFrontCommand())
+      .onFalse(new ArmRelaxCommand());
+    new JoystickButton(driveController, 3)
+      .onTrue(new ArmToBackCommand())
+      .onFalse(new ArmRelaxCommand());
+  }
+
+  /*public void testIntake() {
     new JoystickButton(driveController, 1)
       .onTrue(new IntakeInCommand())
       .onFalse(new IntakeStopCommand());
@@ -184,7 +194,7 @@ public class RobotContainer {
   private double getDriverYAxis() {
     return driveController.getRightStickX();
   }
-  
+
 
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.

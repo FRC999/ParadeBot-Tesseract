@@ -17,11 +17,13 @@ import frc.robot.Constants;
 
 public class ArmSubsystem extends SubsystemBase {
   /** Creates a new ArmSubsystem. */
-private WPI_TalonSRX armMotor = new WPI_TalonSRX(Constants.ArmConstants.ARM_MOTOR_CANID);
+private WPI_TalonSRX armMotor;
 
-double relativePosition = getAngleRelativeEncoder() - Constants.ArmConstants.absoluteEncoderZeroValue;
+
+//double relativePosition = getAngleAbsoluteEncoder() - Constants.ArmConstants.absoluteEncoderZeroValue;
 
   public ArmSubsystem() {
+    armMotor = new WPI_TalonSRX(Constants.ArmConstants.ARM_MOTOR_CANID);
     configureArmMotor();
   }
 
@@ -67,29 +69,23 @@ double relativePosition = getAngleRelativeEncoder() - Constants.ArmConstants.abs
         armMotor.setSelectedSensorPosition((getAngleAbsoluteEncoder()-Constants.ArmConstants.absoluteEncoderZeroValue));
   }
 
-  public int getAngleRelativeEncoder() {
+  public double getAngleAbsoluteEncoder() {
    // return (int) armMotor.getSelectedSensorPosition();
-    return (int) armMotor.getSensorCollection().getPulseWidthPosition() & 0xFFF;
+    return armMotor.getSensorCollection().getPulseWidthPosition() & 0xFFF;
   }
-
-  public void calibrateRelativeEncoder() {
-    relativePosition = (Constants.ArmConstants.armMotorInvert^Constants.ArmConstants.armEncoderSensorPhase)?-relativePosition:relativePosition; 
-    armMotor.setSelectedSensorPosition(relativePosition);
-    System.out.println("*** Set relative encoder for Arm motor to " + relativePosition);
-   }
   
 
-  public double getAngleAbsoluteEncoder() {
-    return relativePosition;
+  public double getAngleRelativeEncoder() {
+    return armMotor.getSelectedSensorPosition();
   }
 
   public void armMoveWithPower(double power) {
     armMotor.set(TalonSRXControlMode.PercentOutput, power);
   }
 
-  public void holdArmAnglePosition(int position) {
-    //armMotor.set(TalonSRXControlMode.Position, position);
-    armMotor.set(TalonSRXControlMode.PercentOutput, Constants.ArmConstants.armHoldingPower);
+  public void holdArmAnglePosition(double position) {
+    armMotor.set(TalonSRXControlMode.Position, position);
+    //armMotor.set(TalonSRXControlMode.PercentOutput, Constants.ArmConstants.armHoldingPower);
   }
 
   @Override

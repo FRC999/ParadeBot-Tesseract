@@ -38,7 +38,9 @@ public final class Constants {
 		public static final double I_ARM = 0.0002;
 		public static final double D_ARM = 0.8;
 		public final static double F_ARM = 0;
-		public final static int absoluteEncoderZeroValue = 2270;	//TODO : cross check this
+		public final static int absoluteEncoderZeroValue = 919;	//TODO : cross check this
+		public final static double armFrontPosition = 20.0;
+		public final static double armBackPosition = 1800;
 
 		public static double armHoldingPower = 0.0;
 	}
@@ -135,7 +137,7 @@ public final class Constants {
 		public static enum ControllerDevice {
 
 			XBOX_CONTROLLER(
-					5, // Port Number for Xbox controller
+					0, // Port Number for Xbox controller
 					ControllerDeviceType.XBOX,
 					0.03, // deadband X for Xbox
 					0.03, // deadband Y for Xbox //ALL DEADBAND FOR XBOX IS PLACEHOLDER

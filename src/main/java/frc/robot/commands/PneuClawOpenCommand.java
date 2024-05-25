@@ -10,14 +10,14 @@ import frc.robot.RobotContainer;
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class ClawCloseCommand extends InstantCommand {
-  public ClawCloseCommand() {
+public class PneuClawOpenCommand extends InstantCommand {
+  public PneuClawOpenCommand() {
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    RobotContainer.pneumaticSubsystem.extendCylinder();
+    RobotContainer.pneumaticSubsystem.retractCylinder();
   }
 }

@@ -14,6 +14,6 @@ public class OuttakeCommandSequence extends SequentialCommandGroup {
   public OuttakeCommandSequence() {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands(new ClawCloseCommand(), new IntakeStopCommand());
+    addCommands(new PneuClawCloseCommand(), new IntakeStopCommand());
   }
 }

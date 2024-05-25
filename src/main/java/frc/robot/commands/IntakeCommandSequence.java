@@ -14,6 +14,6 @@ public class IntakeCommandSequence extends SequentialCommandGroup {
   public IntakeCommandSequence() {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands(new ClawOpenCommand(), new IntakeInCommand());
+    addCommands(new PneuClawOpenCommand(), new IntakeInCommand());
   }
 }
