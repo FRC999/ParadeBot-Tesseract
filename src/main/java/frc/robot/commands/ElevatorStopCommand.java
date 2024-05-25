@@ -10,14 +10,15 @@ import frc.robot.RobotContainer;
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class ElevatorMoveUp extends InstantCommand {
-  public ElevatorMoveUp() {
+public class ElevatorStopCommand extends InstantCommand {
+  public ElevatorStopCommand() {
     addRequirements(RobotContainer.elevatorSubsystem);
+    // Use addRequirements() here to declare subsystem dependencies.
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    RobotContainer.elevatorSubsystem.elevatorMoveWithPower(0.2);
+    RobotContainer.elevatorSubsystem.elevatorMoveWithPower(0);
   }
-} //temp
+}

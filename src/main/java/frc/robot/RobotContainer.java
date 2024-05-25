@@ -8,12 +8,13 @@ import frc.robot.Constants.OIConstants.ControllerDevice;
 import frc.robot.Constants.ControllerConstants;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.commands.Autos;
+import frc.robot.commands.CalibrateElevatorCommand;
 import frc.robot.commands.PneuClawCloseCommand;
 import frc.robot.commands.PneuClawOpenCommand;
 import frc.robot.commands.DriveManuallyCommand;
-import frc.robot.commands.ElevatorMoveDown;
-import frc.robot.commands.ElevatorMoveStop;
-import frc.robot.commands.ElevatorMoveUp;
+import frc.robot.commands.ElevatorDownWithPowerCommand;
+import frc.robot.commands.ElevatorStopCommand;
+import frc.robot.commands.ElevatorUpWithPowerCommand;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.IntakeCommandSequence;
 import frc.robot.commands.IntakeInCommand;
@@ -102,6 +103,7 @@ public class RobotContainer {
     //m_driverController.b().whileTrue(m_exampleSubsystem.exampleMethodCommand());
 
     //testArm();
+    testElevator();
   }
 
   private void configureDriverInterface() {
@@ -132,7 +134,7 @@ public class RobotContainer {
     */
   }
 
-  private void testElevator() {
+ /*  private void testElevator() {
     new JoystickButton(driveController, ControllerConstants.CHANGEVIEWBUTTON)
       .onTrue(new ElevatorMoveUp())
       .onFalse(new ElevatorMoveStop());
@@ -141,6 +143,7 @@ public class RobotContainer {
       .onTrue(new ElevatorMoveDown())
       .onFalse(new ElevatorMoveStop());
   }
+  */
 
   //test commands (ignore for parade lol)
 
@@ -159,6 +162,18 @@ public class RobotContainer {
     new JoystickButton(driveController, 3)
       .onTrue(new ArmToBackCommand())
       .onFalse(new ArmRelaxCommand());
+  }
+
+  private void testElevator(){
+    new JoystickButton(driveController, 2)
+      .onTrue(new ElevatorUpWithPowerCommand())
+      .onFalse(new ElevatorStopCommand());
+    new JoystickButton(driveController, 3)
+      .onTrue(new ElevatorDownWithPowerCommand())
+      .onFalse(new ElevatorStopCommand());
+    new JoystickButton(driveController, 1)
+      .onTrue(new CalibrateElevatorCommand())
+      .onFalse(new ElevatorStopCommand());
   }
 
   /*public void testIntake() {

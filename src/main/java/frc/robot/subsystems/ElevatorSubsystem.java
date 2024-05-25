@@ -64,6 +64,10 @@ public class ElevatorSubsystem extends SubsystemBase {
    return elevatorMotor.getSensorCollection().getPulseWidthPosition() &
    0xFFF;
   }
+
+  public double getElevatorCurrentRecord() {
+    return elevatorMotor.getSupplyCurrent();
+  }
    
   public void elevatorMoveWithPower(double power) {
    elevatorMotor.set(TalonSRXControlMode.PercentOutput, power);
@@ -71,6 +75,10 @@ public class ElevatorSubsystem extends SubsystemBase {
    
   public void elevatorHoldPosition(double position) {
    elevatorMotor.set(TalonSRXControlMode.Position, position);
+  }
+
+  public void resetElevatorEncoder() {
+    elevatorMotor.setSelectedSensorPosition(Constants.ElevatorConstants.elevatorCalibrationZeroPosition, 0, Constants.ElevatorConstants.configureTimeoutMs);
   }
   
   @Override

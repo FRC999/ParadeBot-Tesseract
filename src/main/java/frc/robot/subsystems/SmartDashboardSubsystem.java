@@ -16,6 +16,7 @@ public class SmartDashboardSubsystem extends SubsystemBase {
   public void updateElevatorTelemetry() {
     SmartDashboard.putNumber("Elevator relative encoder value", RobotContainer.elevatorSubsystem.getElevatorRelativeEncoder());
     SmartDashboard.putNumber("Elevator absolute encoder value", RobotContainer.elevatorSubsystem.getElevatorAbsoluteEncoder());
+    SmartDashboard.putNumber("Elevator Motor  Current Record", RobotContainer.elevatorSubsystem.getElevatorCurrentRecord());
   }
 
   public void updateArmTelemetry() {
