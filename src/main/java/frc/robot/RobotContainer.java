@@ -117,20 +117,48 @@ public class RobotContainer {
   // look at me !! ->
   private void paradeCommandGroup() {
     // robot intake when lt button is pressed
-    new JoystickButton(driveController, ControllerConstants.LTBUTTON)
-      .onTrue(new IntakeCommandSequence());
+    //new JoystickButton(driveController, ControllerConstants.LTBUTTON)
+    //  .onTrue(new IntakeCommandSequence());
 
     // robot outtake when rt button is pressed
-    new JoystickButton(driveController, ControllerConstants.RTBUTTON)
-      .onTrue(new OuttakeCommandSequence());
+    //new JoystickButton(driveController, ControllerConstants.RTBUTTON)
+    //  .onTrue(new OuttakeCommandSequence());
 
-    //primal version of touch-sensitive thing
-    new Trigger(() -> (driveController.getRawAxis(Constants.ControllerConstants.RBBUTTON) > 0.3))
-      .onTrue(new ArmRotateCommand())
-      .onFalse(new IntakeStopCommand());
-    new Trigger(() -> (driveController.getRawAxis(Constants.ControllerConstants.LBBUTTON) > 0.3))
-      .onTrue(new IntakeTakeCube())
-      .onFalse(new IntakeStopCommand());
+    // Left Trigger - open Claw
+    new JoystickButton(driveController, ControllerConstants.LTBUTTON)
+      .onTrue(new PneuClawOpenCommand());
+
+    // Right Trigger - close Claw
+    new JoystickButton(driveController, ControllerConstants.RTBUTTON)
+      .onTrue(new PneuClawCloseCommand());
+
+    // A - Elevator down, calibrate elevator, while holding
+    new JoystickButton(driveController, 1)
+      .onTrue(new CalibrateElevatorCommand())
+      .onFalse(new ElevatorStopCommand());
+
+    // Y - Elevator UP to the top, while holding
+    new JoystickButton(driveController, 4)
+      .onTrue(new ElevatorToTheTopPosition())
+      .onFalse(new ElevatorStopCommand());
+
+    // B - Arm to Front
+    new JoystickButton(driveController, 2)
+      .onTrue(new ArmToFrontCommand())
+      .onFalse(new ArmRelaxCommand());
+    // X - Arm to Back
+    new JoystickButton(driveController, 3)
+      .onTrue(new ArmToBackCommand())
+      .onFalse(new ArmRelaxCommand());
+
+
+      //primal version of touch-sensitive thing
+    //new Trigger(() -> (driveController.getRawAxis(Constants.ControllerConstants.RBBUTTON) > 0.3))
+    //  .onTrue(new ArmRotateCommand())
+    //  .onFalse(new IntakeStopCommand());
+    //new Trigger(() -> (driveController.getRawAxis(Constants.ControllerConstants.LBBUTTON) > 0.3))
+    //  .onTrue(new IntakeTakeCube())
+    //  .onFalse(new IntakeStopCommand());
     /*
     new Trigger(() -> (driveController.getRawAxis(Constants.ControllerConstants.RBBUTTON) > 0))
       .onTrue(new RotateIntakeCommand(  ()-> driveController.getRawAxis(Constants.ControllerConstants.RBBUTTON)));
