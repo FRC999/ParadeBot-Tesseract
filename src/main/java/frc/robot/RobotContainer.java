@@ -77,10 +77,12 @@ public class RobotContainer {
     // Configure the trigger bindings
     configureDriverInterface();
     configureBindings();
+    /*
     driveSubsystem.setDefaultCommand(
       new DriveManuallyCommand(
         () -> getDriverXAxis(),
         () -> getDriverYAxis()));
+    */
 
     
   }
