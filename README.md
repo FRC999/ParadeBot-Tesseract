@@ -1,5 +1,5 @@
 # ParadeBot-Tesseract
-This is a 2017 parade bot; 2024 offseason project.
+This is a 2017 parade bot; retrofitted for 2026 firmware for driver practice. ONLY DRIVE.
 
 Controls
 
