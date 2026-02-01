@@ -29,8 +29,8 @@ public class DriveManuallyCommand extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    double move = xAxis.getAsDouble();
-    double turn = yAxis.getAsDouble();
+    double move = -yAxis.getAsDouble();
+    double turn = xAxis.getAsDouble();
 
     RobotContainer.driveSubsystem.manualDrive(move, turn * DriveConstants.turnAdjust);
   }

@@ -38,6 +38,7 @@ import frc.robot.subsystems.SmartDashboardSubsystem;
 
 import java.util.function.DoubleSupplier;
 
+import edu.wpi.first.wpilibj.Joystick;
 //import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
@@ -71,18 +72,20 @@ public class RobotContainer {
    //   new CommandXboxController(DriveConstants.DRIVER_CONTROLLER_PORT);
 
   public static Controller driveController;
+  public static Joystick joystick1 = new Joystick(0);
+  public static Joystick joystick2 = new Joystick(2);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the trigger bindings
     configureDriverInterface();
     configureBindings();
-    /*
+    
     driveSubsystem.setDefaultCommand(
       new DriveManuallyCommand(
         () -> getDriverXAxis(),
         () -> getDriverYAxis()));
-    */
+
 
     
   }
@@ -242,11 +245,11 @@ public class RobotContainer {
 */
 
   private double getDriverXAxis() {
-    return driveController.getLeftStickY();
+    return joystick2.getX();
   }
 
   private double getDriverYAxis() {
-    return driveController.getRightStickX();
+    return joystick1.getY() * -1;
   }
 
 
